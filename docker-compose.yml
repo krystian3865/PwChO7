@@ -1,0 +1,30 @@
+version: '3.3'
+services:
+ mysql:
+  image: mysql
+  container_name: pwcho2018_83714
+  ports:
+   - "3306"
+  environment:
+   - MYSQL_ROOT_PASSWORD=root
+   - MYSQL_DATABASE=baza
+   - MYSQL_USER=KAlbiniak
+   - MYSQL_PASSWORD=password
+  networks:
+   bridge_zadanie1:
+    ipv4_address: 10.0.10.3
+ java:
+  image: krystian3865/docker
+  container_name: java
+  depends_on:
+   - mysql
+  networks:
+   - bridge_zadanie1
+  
+networks:
+ bridge_zadanie1:
+  driver: bridge
+  ipam:
+   config:
+    - subnet: 10.0.10.0/16
+      gateway: 10.0.10.1
